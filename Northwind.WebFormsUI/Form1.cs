@@ -1,6 +1,7 @@
 using Northwind.Business.Abstract;
 using Northwind.Business.Concrete;
-using Northwind.DataAccess.Concrete;
+using Northwind.DataAccess.Concrete.EntityFramework;
+using Northwind.DataAccess.Concrete.NHibernateFake;
 
 namespace Northwind.WebFormsUI
 {
@@ -11,11 +12,11 @@ namespace Northwind.WebFormsUI
             InitializeComponent();
         }
 
-        IProductService _productservice = new ProductManager(new ProductDal());
+        IProductService _productService = new ProductManager(new EfProductDal()); //form1 ctorunda new leme iþlemi yapýlabilirdi.
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dgwProducts.DataSource = _productservice.GetAll();
+            dgwProducts.DataSource = _productService.GetAll();
         }
     }
 }

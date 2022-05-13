@@ -9,7 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Northwind.Business\Northwind.Business.csproj" />
+    <ProjectReference Include="..\Northwind.Entities\Northwind.Entities.csproj" />
   </ItemGroup>
 
 </Project>
