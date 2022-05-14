@@ -73,47 +73,63 @@ namespace Northwind.WebFormsUI
 
         private void btnProductAdd_Click(object sender, EventArgs e)
         {
-            _productService.Add(new Product
+            try
             {
-                CategoryId = Convert.ToInt32(cbxProductCategoryAdd.SelectedValue),
-                ProductName = tbxProductNameAdd.Text,
-                UnitPrice = Convert.ToDecimal(tbxProductUnitPriceAdd.Text),
-                UnitsInStock = Convert.ToInt16(tbxProductUnitsInStockAdd.Text),
-                QuantityPerUnit = tbxProductQuantityPerUnitAdd.Text
+                _productService.Add(new Product
+                {
+                    CategoryId = Convert.ToInt32(cbxProductCategoryAdd.SelectedValue),
+                    ProductName = tbxProductNameAdd.Text,
+                    UnitPrice = Convert.ToDecimal(tbxProductUnitPriceAdd.Text),
+                    UnitsInStock = Convert.ToInt16(tbxProductUnitsInStockAdd.Text),
+                    QuantityPerUnit = tbxProductQuantityPerUnitAdd.Text
 
 
 
-            });
+                });
 
-            MessageBox.Show("Product Added Successfully!");
+                MessageBox.Show("Product Added Successfully!");
 
-            ListProducts();
+                ListProducts();
 
-            ClearAddProductGroupBoxItems();
+                ClearAddProductGroupBoxItems();
+            }
+            catch (Exception exception)
+            {
+
+                MessageBox.Show(exception.Message);
+            }
 
         }
 
         private void btnProductUpdate_Click(object sender, EventArgs e)
         {
 
-            _productService.Update(new Product
+            try
+            {
+                _productService.Update(new Product
+                {
+
+                    ProductId = Convert.ToInt32(dgwProducts.CurrentRow.Cells[0].Value),
+                    CategoryId = Convert.ToInt32(cbxProductCategoryUpdate.SelectedValue),
+                    ProductName = tbxProductNameUpdate.Text,
+                    UnitPrice = Convert.ToDecimal(tbxProductUnitPriceUpdate.Text),
+                    UnitsInStock = Convert.ToInt16(tbxProductUnitsInStockUpdate.Text),
+                    QuantityPerUnit = tbxProductQuantityPerUnitUpdate.Text
+
+
+                });
+
+                MessageBox.Show("Product Updated Successfully!");
+
+                ListProducts();
+
+                ClearUpdateOrDeleteProductGroupBoxItems();
+            }
+            catch (Exception exception)
             {
 
-                ProductId=Convert.ToInt32(dgwProducts.CurrentRow.Cells[0].Value),
-                CategoryId=Convert.ToInt32(cbxProductCategoryUpdate.SelectedValue),
-                ProductName=tbxProductNameUpdate.Text,
-                UnitPrice=Convert.ToDecimal(tbxProductUnitPriceUpdate.Text),
-                UnitsInStock=Convert.ToInt16(tbxProductUnitsInStockUpdate.Text),
-                QuantityPerUnit=tbxProductQuantityPerUnitUpdate.Text
-
-
-            });
-
-            MessageBox.Show("Product Updated Successfully!");
-
-            ListProducts();
-
-            ClearUpdateOrDeleteProductGroupBoxItems();
+                MessageBox.Show(exception.Message);
+            }
 
         }
 

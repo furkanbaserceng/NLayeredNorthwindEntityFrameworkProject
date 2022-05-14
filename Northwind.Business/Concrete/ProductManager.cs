@@ -1,4 +1,6 @@
-﻿using Northwind.Business.Abstract;
+﻿using FluentValidation;
+using Northwind.Business.Abstract;
+using Northwind.Business.ValidationRules.FluentValidation;
 using Northwind.DataAccess.Abstract;
 using Northwind.Entities.Concrete;
 using System;
@@ -38,12 +40,32 @@ namespace Northwind.Business.Concrete
 
         public void Add(Product product)
         {
-             _productDal.Add(product);
+            ProductValidator productValidator = new ProductValidator(); //static classdan alınabalir.
+            var result = productValidator.Validate(product);
+            if (result.Errors.Count > 0)
+            {
+                throw new ValidationException(result.Errors);
+            }
+            else 
+            {
+                _productDal.Add(product);
+            }
         }
 
         public void Update(Product product)
         {
-            _productDal.Update(product);
+            ProductValidator productValidator = new ProductValidator(); //static classdan alınabalir.
+            var result = productValidator.Validate(product);
+            if (result.Errors.Count > 0)
+            {
+                throw new ValidationException(result.Errors);
+            }
+            else
+            {
+                _productDal.Update(product);
+            }
+
+            
         }
 
         public void Delete(Product product)
@@ -55,7 +77,7 @@ namespace Northwind.Business.Concrete
             catch
             {
 
-                throw new Exception("Unseccesfull Operations!!!");
+                throw new Exception("Unsuccesfull Operations!!!");
             }
         }
     }
