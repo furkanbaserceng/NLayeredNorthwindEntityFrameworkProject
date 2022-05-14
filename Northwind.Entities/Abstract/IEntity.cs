@@ -8,5 +8,6 @@ namespace Northwind.Entities.Abstract
 {
     public interface IEntity
     {
+        //IEntity, veritabanı tablolarına karşılık gelecek classları imzalamak için oluşturuldu.
     }
 }

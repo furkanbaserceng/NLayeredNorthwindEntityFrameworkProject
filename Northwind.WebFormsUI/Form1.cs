@@ -13,6 +13,7 @@ namespace Northwind.WebFormsUI
         }
 
         IProductService _productService = new ProductManager(new EfProductDal()); //form1 ctorunda new leme iþlemi yapýlabilirdi.
+       // IProductService _productService = new ProductManager(new NhProductDal()); //sistem kolayca nhibernate e geçirilebiliyor.
 
         private void Form1_Load(object sender, EventArgs e)
         {
