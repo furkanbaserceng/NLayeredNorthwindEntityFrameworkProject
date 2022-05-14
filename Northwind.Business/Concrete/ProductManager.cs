@@ -19,6 +19,8 @@ namespace Northwind.Business.Concrete
             _productDal = productDal;
         }
 
+        
+
         public List<Product> GetAll()
         {
             return _productDal.GetAll();
@@ -29,9 +31,32 @@ namespace Northwind.Business.Concrete
             return _productDal.GetAll(p => p.CategoryId == categoryId).ToList();
         }
 
-        public List<Product> GetSearchProductName(string key)
+        public List<Product> GetSearchProductName(string searchKey)
         {
-            return _productDal.GetAll(p => p.ProductName.Contains(key)).ToList();
+            return _productDal.GetAll(p => p.ProductName.ToLower().Contains(searchKey.ToLower())).ToList();
+        }
+
+        public void Add(Product product)
+        {
+             _productDal.Add(product);
+        }
+
+        public void Update(Product product)
+        {
+            _productDal.Update(product);
+        }
+
+        public void Delete(Product product)
+        {
+            try
+            {
+                _productDal.Delete(product);
+            }
+            catch
+            {
+
+                throw new Exception("Unseccesfull Operations!!!");
+            }
         }
     }
 }

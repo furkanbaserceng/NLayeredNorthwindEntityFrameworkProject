@@ -11,7 +11,11 @@ namespace Northwind.Business.Abstract
     {
         List<Product> GetAll();
         List<Product> GetByCategoryId(int categoryId);
-        List<Product> GetSearchProductName(string key);
+        List<Product> GetSearchProductName(string searchKey);
+
+        void Add(Product product);
+        void Update(Product product);
+        void Delete(Product product);
 
 
     }
