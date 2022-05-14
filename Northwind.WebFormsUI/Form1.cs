@@ -1,5 +1,6 @@
 using Northwind.Business.Abstract;
 using Northwind.Business.Concrete;
+using Northwind.Business.DependencyResolvers.Ninject;
 using Northwind.DataAccess.Concrete.EntityFramework;
 using Northwind.DataAccess.Concrete.NHibernateFake;
 using Northwind.Entities.Concrete;
@@ -11,12 +12,13 @@ namespace Northwind.WebFormsUI
         public Form1()
         {
             InitializeComponent();
+            _productService = InstanceFactory.GetInstance<IProductService>();
+            _categoryService = InstanceFactory.GetInstance<ICategoryService>();
         }
-
-        IProductService _productService = new ProductManager(new EfProductDal()); //form1 ctorunda new leme iþlemi yapýlabilirdi.
-                                                                                  // IProductService _productService = new ProductManager(new NhProductDal()); //sistem kolayca nhibernate e geçirilebiliyor.
-
-        ICategoryService _categoryService = new CategoryManager(new EfCategoryDal());
+        private IProductService _productService;
+        private ICategoryService _categoryService;
+        //IProductService _productService = new ProductManager(new EfProductDal()); 
+        //ICategoryService _categoryService = new CategoryManager(new EfCategoryDal());
 
         private void Form1_Load(object sender, EventArgs e)
         {
